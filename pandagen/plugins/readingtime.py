@@ -14,9 +14,11 @@ class Readingtime(pandagen.Plugin):
         self.into = into
 
     def _execute(self, pg):
-        for k, v in pg['data'].items():
+        for k, v in pg.data.items():
             if 'contents' not in v:
                 continue
             words = len(filter(None, v['contents'].split()))
-            reading_time = words / float(self.wpm) / 60
+            reading_time = words / (self.wpm / 60.0)
             v[self.into] = datetime.timedelta(seconds=reading_time)
+            logging.info('Computed reading time of %s (%d words): %s seconds.',
+                    k, words, reading_time)
