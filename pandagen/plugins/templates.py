@@ -1,8 +1,6 @@
 # Pandagen
 
 import jinja2
-import logging
-import os
 
 from .. import pandagen
 
@@ -13,7 +11,8 @@ class Jinja2(pandagen.Plugin):
     outputs overwrites the 'contents' field.
     """
 
-    def __init__(self, templates, default='layout', into='contents', cache='.cache'):
+    def __init__(self, templates, default='layout', into='contents',
+                 cache='.cache'):
         self.env = jinja2.Environment(
             loader=jinja2.FileSystemLoader(templates),
             bytecode_cache=jinja2.FileSystemBytecodeCache(cache),

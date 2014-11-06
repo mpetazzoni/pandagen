@@ -26,8 +26,10 @@ class Source(pandagen.Plugin):
         if os.path.isdir(self.source):
             logging.debug('Searching into %s...', self.source)
             for root, dirs, files in os.walk(self.source):
-                logging.debug('%s: %s -- %s -- %s', self.source, root, dirs, files)
-                map(lambda f: self._load(pg.data, os.path.join(root, f)), files)
+                logging.debug('%s: %s -- %s -- %s',
+                              self.source, root, dirs, files)
+                map(lambda f: self._load(pg.data, os.path.join(root, f)),
+                    files)
         else:
             self._load(pg.data, self.source)
 

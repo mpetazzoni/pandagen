@@ -7,7 +7,8 @@ from .. import pandagen
 
 
 class Readingtime(pandagen.Plugin):
-    """Computes an estimated reading time and seeds it into each resource's data."""
+    """Computes an estimated reading time and seeds it into each resource's
+    data."""
 
     def __init__(self, wpm=200, into='reading_time'):
         self.wpm = wpm
@@ -21,4 +22,4 @@ class Readingtime(pandagen.Plugin):
             reading_time = words / (self.wpm / 60.0)
             v[self.into] = datetime.timedelta(seconds=reading_time)
             logging.info('Computed reading time of %s (%d words): %s seconds.',
-                    k, words, reading_time)
+                         k, words, reading_time)

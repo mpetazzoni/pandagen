@@ -1,7 +1,6 @@
 # Pandagen
 
 import logging
-import time
 import watchdog.events
 import watchdog.observers
 

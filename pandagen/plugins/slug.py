@@ -1,6 +1,5 @@
 # Pandagen
 
-import logging
 import slugify
 
 from .. import pandagen

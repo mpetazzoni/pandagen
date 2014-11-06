@@ -36,5 +36,4 @@ class ExtensionRewrite(pandagen.Plugin):
             if s[1] == self.from_ext:
                 v['output'] = s[0] + self.to_ext
                 logging.info('Changed output extension to %s for %s.',
-                        self.to_ext, v['output'])
-
+                             self.to_ext, v['output'])

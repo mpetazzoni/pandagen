@@ -1,7 +1,6 @@
 # Pandagen
 
 import logging
-import os
 
 from .. import pandagen
 
@@ -14,11 +13,11 @@ class Collections(pandagen.Plugin):
 
     def _execute(self, pg):
         collection = [v for v in pg.data.values()
-                if v.get('collection') == self.collection]
+                      if v.get('collection') == self.collection]
         collection.sort(key=lambda v: v[self.sortby])
 
         logging.info('Processing collection %s of %d item(s)...',
-                self.collection, len(collection))
+                     self.collection, len(collection))
 
         if 'collections' not in pg.metadata:
             pg.metadata['collections'] = {}
