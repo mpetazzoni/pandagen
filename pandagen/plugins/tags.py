@@ -19,13 +19,7 @@ class Tags(pandagen.Plugin):
         pg.metadata['tags'] = pg.metadata.get('tags', {})
 
         for k, v in pg.data.items():
-            tags = v.get('tags', [])
-            if type(tags) is str:
-                tags = [tags]
-
-            tags = map(lambda s: s.replace(',', ' ').split(), tags)
-            tags = filter(None, reduce(sum, tags, []))
-
+            tags = self._as_list(v.get('tags'))
             for tag in tags:
                 pg.metadata['tags'][tag] = pg.metadata['tags'].get(tag, 0) + 1
             v['tags'] = tags

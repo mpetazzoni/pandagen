@@ -37,3 +37,13 @@ class Plugin:
 
     def _execute(self, pg):
         raise NotImplementedError
+
+    def _as_list(self, v):
+        """Parses the given value, potentially comma-separated, and returns it
+        as a list of distinct elements."""
+        v = v or []
+        if type(v) is str:
+            v = [v]
+
+        v = map(lambda s: s.replace(',', ' ').split(), v)
+        return filter(None, reduce(sum, v, []))
