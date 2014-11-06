@@ -200,6 +200,37 @@ plugin does not take any arguments.
 
 ### Reading time
 
+The reading time plugin (`pandagen.plugins.readingtime.ReadingTime`)
+computes the expected reading time of each resource and sets it as a
+property of that resource. The algorithm considers the number of words
+in a given property of each resource and uses an expected
+words-per-minute reading speed to computes the reading time. The reading
+time is specified as a `datetime.timedelta` object.
+
+The plugin accepts the following parameters:
+
+* `wpm` (defaults to 200), the expected reading speed in words per
+  minute -- 200 seems to be a well accepted average;
+* `using` (defaults to `contents`), the property in which the resource's
+  content is to be found. All resources loaded by the source plugin have
+  their body in the `contents`.
+* `into` (defaults to `reading_time`), the property of the resource in
+  which the plugin will output the reading time.
+
+```python
+# Assuming src/post.md is a 1300 words document.
+> p = (Pandagen()
+    .use(source.Source())
+    .use(readingtime.ReadingTime())
+    .execute())
+> rt = p.data['post.md']['reading_time']
+> rt.total_seconds()
+390.0
+> print("Expected reading time is {:.1f} minute(s)."
+        .format(rt.total_seconds() / 60))
+Expected reading time is 6.5 minute(s).
+```
+
 ### Rewrite
 
 ### Serve
