@@ -1,5 +1,6 @@
 jinja2
 markdown
+mdx_smartypants
 pyyaml
 slugify
 watchdog
