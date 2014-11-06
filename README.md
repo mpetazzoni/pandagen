@@ -66,39 +66,29 @@ to build a blog:
 from pandagen import Pandagen
 from pandagen.plugins import *
 
-p = Pandagen()
-
-# Load all Markdown files from src/, recursively
-p.use(source.Source(source='src/', exts=['.md', '.markdown']))
-
-# Ignore resources that set draft: true
-p.use(drafts.Drafts())
-
-# Parse each resource's tags
-p.use(tags.Tags())
-
-# Generate a slug from each resource's title
-p.use(slug.Slug())
-
-# Render the contents of each resource from Markdown to HTML
-p.use(transform.Markdown())
-
-# Change the output path of each resource to be a permalink. Default
-# pattern is /YYYY/mm/dd/slug-title/
-p.use(permalinks.Permalinks())
-
-# Render each resource through Jinja2 templates according to the
-# resource's layout. Using layout.tmpl as the default.
-p.use(templates.Jinja2('templates/'))
-
-# Clean the output folder. Default is build/
-p.use(clean.Clean())
-
-# Write files to the output folder. Default is build/
-p.use(write.Write())
-
-# Run the pipeline.
-p.execute()
+(p = Pandagen()
+    # Load all Markdown files from src/, recursively
+    .use(source.Source(source='src/', exts=['.md', '.markdown']))
+    # Ignore resources that set draft: true
+    .use(drafts.Drafts())
+    # Parse each resource's tags
+    .use(tags.Tags())
+    # Generate a slug from each resource's title
+    .use(slug.Slug())
+    # Render the contents of each resource from Markdown to HTML
+    .use(transform.Markdown())
+    # Change the output path of each resource to be a permalink. Default
+    # pattern is /YYYY/mm/dd/slug-title/
+    .use(permalinks.Permalinks())
+    # Render each resource through Jinja2 templates according to the
+    # resource's layout. Using layout.tmpl as the default.
+    .use(templates.Jinja2('templates/'))
+    # Clean the output folder. Default is build/
+    .use(clean.Clean())
+    # Write files to the output folder. Default is build/
+    .use(write.Write())
+    # Run the pipeline.
+    .execute())
 ```
 
 ## Plugin documentation
@@ -211,6 +201,23 @@ plugin does not take any arguments.
 ### Reading time
 
 ### Rewrite
+
+### Serve
+
+The serve plugin (`pandagen.plugins.serve.Serve`) spins up Python's
+`SimpleHTTPServer` to quickly serve the build output. It is meant to be
+used as the last plugin (or one of the last) in the pipeline. The target
+will be served forever, until `^C` is pressed, after which the pipeline
+continues.
+
+By default the plugin serves the content of the `build/` directory on
+port 8000. The served location can be overridden via the `target`
+argument, and the port can be changed via the `port` argument.
+
+```python
+# This will serve the current directory on port 8080
+> Pandagen().use(serve.Serve(target='.', port=8080)).execute()
+```
 
 ### Slug
 

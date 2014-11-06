@@ -10,6 +10,7 @@ __all__ = [
     'permalinks',
     'readingtime',
     'rewrite',
+    'serve',
     'slug',
     'source',
     'static',
