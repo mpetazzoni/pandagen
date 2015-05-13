@@ -35,7 +35,6 @@ class Markdown(pandagen.Plugin):
             return element.tag == 'p' and len(element) == 1 and \
                     element.getchildren()[0].tag == 'img'
 
-
     def __init__(self, on='contents'):
         self.on = on
 
@@ -47,4 +46,4 @@ class Markdown(pandagen.Plugin):
                 continue
             v[self.on] = markdown.markdown(
                 v[self.on], extensions=[Markdown.PictureExtension(),
-                                        'smartypants(entities=named)'])
+                                        'markdown.extensions.smarty'])
