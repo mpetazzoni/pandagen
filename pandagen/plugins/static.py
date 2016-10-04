@@ -27,3 +27,4 @@ class Static(pandagen.Plugin):
 
         logging.info('Copying directory %s into %s...', self.src, self.dst)
         shutil.copytree(self.src, os.path.join(self.dst, self.src))
+        logging.info('Done copying static resources into %s.', self.dst)
