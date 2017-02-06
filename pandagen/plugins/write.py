@@ -13,13 +13,16 @@ class Write(pandagen.Plugin):
 
     def _execute(self, pg):
         for v in pg.data.values():
-            path = os.path.join(self.to, v['output'])
-            dir = os.path.dirname(path)
-            if not os.path.exists(dir):
-                os.makedirs(dir)
+            self._write(v)
 
-            with open(path, 'w+') as f:
-                f.write(v['contents'])
-            logging.info('Wrote %s as %s%s.', v['source'], path,
-                         ' (`{}`)'.format(v['title'])
-                         if 'title' in v else '')
+    def _write(self, v):
+        path = os.path.join(self.to, v['output'])
+        dir = os.path.dirname(path)
+        if not os.path.exists(dir):
+            os.makedirs(dir)
+
+        with open(path, 'w+') as f:
+            f.write(v['contents'].encode('utf-8'))
+        logging.info('Wrote %s as %s%s.', v['source'], path,
+                     ' (`{}`)'.format(v['title'].encode('utf-8'))
+                     if 'title' in v else '')
