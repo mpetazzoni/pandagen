@@ -140,7 +140,8 @@ the sort order of the collection.
 
 By default, the plugin will sort by source filename (via the `source`
 metadata property of each document) but this can be overridden by
-passing a different `sortby` value to the plugin.
+passing a different `sortby` value to the plugin. You can also revert
+the sort order by passing `reverse=True`.
 
 ```python
 # Assuming src/a.md and src/b.md are two documents in the 'blog'

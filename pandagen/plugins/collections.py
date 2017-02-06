@@ -7,14 +7,15 @@ from .. import pandagen
 
 class Collections(pandagen.Plugin):
 
-    def __init__(self, collection, sortby='source'):
+    def __init__(self, collection, sortby='source', reverse=False):
         self.collection = collection
         self.sortby = sortby
+        self.reverse = reverse
 
     def _execute(self, pg):
         collection = [v for v in pg.data.values()
                       if v.get('collection') == self.collection]
-        collection.sort(key=lambda v: v[self.sortby])
+        collection.sort(key=lambda v: v[self.sortby], reverse=self.reverse)
 
         logging.info('Processing collection %s of %d item(s)...',
                      self.collection, len(collection))
