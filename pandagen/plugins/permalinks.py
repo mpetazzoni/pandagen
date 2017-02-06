@@ -18,7 +18,7 @@ class Permalinks(pandagen.Plugin):
                 (head, tail) = os.path.split(v['output'])
                 v['path'] = os.path.join(head, self.pattern.render(v))
                 v['output'] = os.path.join(v['path'], 'index.html')
-                logging.info('Permalink for %s: %s', k, v['output'])
+                logging.debug('Permalink for %s: %s', k, v['output'])
             except:
                 logging.warn(
                     'No permalink defined for %s (missing properties?).', k)

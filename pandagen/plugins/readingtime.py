@@ -22,5 +22,6 @@ class Readingtime(pandagen.Plugin):
             words = len(filter(None, v[self.using].split()))
             reading_time = words / (self.wpm / 60.0)
             v[self.into] = datetime.timedelta(seconds=reading_time)
-            logging.info('Computed reading time of %s\'s %s (%d words): %s seconds.',
-                         k, self.using, words, reading_time)
+            logging.debug(
+                'Computed reading time of %s\'s %s (%d words): %s seconds.',
+                k, self.using, words, reading_time)

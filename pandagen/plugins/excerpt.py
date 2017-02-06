@@ -24,7 +24,7 @@ class Excerpt(pandagen.Plugin):
             contents = v.get(self.on, '')
             data = contents.split(self.until, 1)
             if len(data) > 1:
-                logging.info('Found excerpt on %s (%d bytes).', k,
-                             len(data[0]))
+                logging.debug('Found excerpt on %s (%d bytes).', k,
+                              len(data[0]))
                 v['excerpt'] = data[0]
             v[self.on] = data[len(data)-1]

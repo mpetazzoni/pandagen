@@ -12,6 +12,8 @@ class Write(pandagen.Plugin):
         self.to = to
 
     def _execute(self, pg):
+        logging.info('Writing %s documents to %s/ ...',
+                     len(pg.data), self.to)
         for v in pg.data.values():
             self._write(v)
 
@@ -23,6 +25,6 @@ class Write(pandagen.Plugin):
 
         with open(path, 'w+') as f:
             f.write(v['contents'].encode('utf-8'))
-        logging.info('Wrote %s as %s%s.', v['source'], path,
-                     ' (`{}`)'.format(v['title'].encode('utf-8'))
-                     if 'title' in v else '')
+        logging.debug('Wrote %s as %s%s.', v['source'], path,
+                      ' (`{}`)'.format(v['title'].encode('utf-8'))
+                      if 'title' in v else '')

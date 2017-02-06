@@ -24,13 +24,13 @@ class Source(pandagen.Plugin):
 
     def _execute(self, pg):
         if os.path.isdir(self.source):
-            logging.debug('Searching into %s...', self.source)
             for root, dirs, files in os.walk(self.source):
-                logging.debug('Processing %s files from %s/ ...',
-                              len(files), root)
+                logging.info('Loading %s files from %s/ ...',
+                             len(files), root)
                 map(lambda f: self._load(pg.data, os.path.join(root, f)),
                     files)
         else:
+            logging.info('Loading single file %s ...', self.source)
             self._load(pg.data, self.source)
 
     def _load(self, data, source):
@@ -54,7 +54,7 @@ class Source(pandagen.Plugin):
         }
         datum.update(yaml.safe_load(StringIO.StringIO(frontmatter)))
         datum['title'] = unicode(datum['title'].strip())
-        logging.info('Read %s%s.', source,
-                     ' (`{}`)'.format(datum['title'].encode('utf-8'))
-                     if 'title' in datum else '')
+        logging.debug('Read %s%s.', source,
+                      ' (`{}`)'.format(datum['title'].encode('utf-8'))
+                      if 'title' in datum else '')
         return datum

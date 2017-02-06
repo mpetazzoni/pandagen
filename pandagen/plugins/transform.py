@@ -47,4 +47,4 @@ class Markdown(pandagen.Plugin):
             v[self.on] = markdown.markdown(
                 v[self.on], extensions=[Markdown.PictureExtension(),
                                         'markdown.extensions.smarty'])
-            logging.info('Transformed %s:%s as Markdown.', k, self.on)
+            logging.debug('Transformed %s:%s as Markdown.', k, self.on)
