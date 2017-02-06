@@ -1,5 +1,6 @@
 # Pandagen
 
+import logging
 import slugify
 
 from .. import pandagen
@@ -16,6 +17,7 @@ class Slug(pandagen.Plugin):
         self.overwrite = overwrite
 
     def _execute(self, pg):
-        for v in pg.data.values():
+        for k, v in pg.data.items():
             if self.into not in v or self.overwrite:
-                v[self.into] = slugify.slugify(unicode(v[self.key]))
+                v[self.into] = slugify.slugify(v[self.key])
+                logging.debug('Computed slug `%s` for %s', v[self.into], k)
