@@ -26,8 +26,8 @@ class Source(pandagen.Plugin):
         if os.path.isdir(self.source):
             logging.debug('Searching into %s...', self.source)
             for root, dirs, files in os.walk(self.source):
-                logging.debug('%s: %s -- %s -- %s',
-                              self.source, root, dirs, files)
+                logging.debug('Processing %s files from %s/ ...',
+                              len(files), root)
                 map(lambda f: self._load(pg.data, os.path.join(root, f)),
                     files)
         else:
@@ -45,11 +45,16 @@ class Source(pandagen.Plugin):
 
     def _read(self, source):
         """Read the given file and generate a resource datum object from it."""
+        logging.debug('Reading %s ...', source)
         with open(source) as f:
             _, frontmatter, contents = Source.YAML_DOC_LIMITER.split(f.read())
-        datum = {'source': source, 'contents': contents.strip()}
-        datum.update(yaml.load(StringIO.StringIO(frontmatter)))
+        datum = {
+            'source': source,
+            'contents': contents.decode('utf-8').strip(),
+        }
+        datum.update(yaml.safe_load(StringIO.StringIO(frontmatter)))
+        datum['title'] = unicode(datum['title'].strip())
         logging.info('Read %s%s.', source,
-                     ' (`{}`)'.format(datum['title'])
+                     ' (`{}`)'.format(datum['title'].encode('utf-8'))
                      if 'title' in datum else '')
         return datum
