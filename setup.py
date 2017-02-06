@@ -2,7 +2,6 @@
 
 # Pandagen
 
-import os
 from setuptools import setup, find_packages
 
 with open('README.md') as f:
@@ -11,9 +10,12 @@ with open('README.md') as f:
 with open('requirements.txt') as r:
     requirements = r.readlines()
 
+with open('pandagen/version.py') as v:
+    exec(v.read())
+
 setup(
-    name='pandagen',
-    version='0.1.0',
+    name=name,  # noqa
+    version=version,  # noqa
     description='Static resource parsing and generation pipeline',
     long_description=readme,
     zip_safe=True,
