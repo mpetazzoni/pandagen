@@ -58,6 +58,10 @@ class Serve(pandagen.Plugin):
         constructor of the Serve plugin.
         """
 
+        SimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map.update({
+            '.html': 'text/html; charset=utf-8'
+        })
+
         def translate_path(self, path):
             path = '/{0}{1}'.format(self.server.pandagen_target, path)
             return (SimpleHTTPServer.SimpleHTTPRequestHandler
