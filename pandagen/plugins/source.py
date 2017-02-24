@@ -55,6 +55,6 @@ class Source(pandagen.Plugin):
         datum.update(yaml.safe_load(StringIO.StringIO(frontmatter)))
         datum['title'] = unicode(datum['title'].strip())
         logging.debug('Read %s%s.', source,
-                      ' (`{}`)'.format(datum['title'].encode('utf-8'))
+                      u' (`{}`)'.format(datum['title'])
                       if 'title' in datum else '')
         return datum

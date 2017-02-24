@@ -26,5 +26,5 @@ class Write(pandagen.Plugin):
         with open(path, 'w+') as f:
             f.write(v['contents'].encode('utf-8'))
         logging.debug('Wrote %s as %s%s.', v['source'], path,
-                      ' (`{}`)'.format(v['title'].encode('utf-8'))
+                      u' (`{}`)'.format(v['title'])
                       if 'title' in v else '')
