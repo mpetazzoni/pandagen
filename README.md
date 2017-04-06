@@ -253,6 +253,25 @@ argument, and the port can be changed via the `port` argument.
 
 ### Slug
 
+The slug plugin (`pandagen.plugins.slug.Slug`) can generate a
+"sluggified" version of any data field, e.g. converting it into a
+URL-safe, caret-delimited string. For example, the string `"An example:
+what a weird thing that is."` becomes
+`"an-example-what-a-weird-thing-that-is"`.
+
+By default, the plugin takes in the `title`, and writes its sluggified
+version back into the `slug` field.
+
+```python
+# Assuming src/post.md is a document with the above title.
+> p = (Pandagen()
+    .use(source.Source())
+    .use(slug.Slug())
+    .execute())
+> p.data['post.md']['slug']
+"an-example-what-a-weird-thing-that-is"
+```
+
 ### Source
 
 ### Static
